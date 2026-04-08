@@ -5,8 +5,9 @@ import lombok.Data;
 import java.time.LocalDate;
 
 @Data
-public class ReciveData {
-    private String amount;
+public class TransactionRequestDTO {
+    private int id;
+    private Double amount;
     private LocalDate date;
     private String title;
     private String type;

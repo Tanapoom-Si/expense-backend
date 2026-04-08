@@ -1,27 +1,23 @@
 package com.dev.expense.controller;
 
-import com.dev.expense.model.ExpenseCategory;
 import com.dev.expense.model.ExpenseTransaction;
-import com.dev.expense.model.ExpenseUser;
-import com.dev.expense.model.ReciveData;
-import com.dev.expense.service.CategoryService;
+import com.dev.expense.model.TransactionRequestDTO;
 import com.dev.expense.service.TransactionService;
-import org.springframework.web.bind.annotation.*;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 
-import java.time.LocalDate;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 @RestController
-@RequestMapping("/api/data")
+@RequestMapping("/api/transaction")
+@RequiredArgsConstructor
+@Slf4j
 public class ManageDataController {
     private final TransactionService transactionService;
-    private final CategoryService categoryService;
-
-    public ManageDataController(TransactionService transactionService,CategoryService categoryService){
-        this.transactionService = transactionService;
-        this.categoryService = categoryService;
-    }
 
     @GetMapping
     public List<ExpenseTransaction> getAllData(){
@@ -29,34 +25,25 @@ public class ManageDataController {
     }
 
     @PostMapping
-    public void addTransaction(@RequestBody ReciveData data){
-        System.out.println("title: " + data.getTitle());
-        System.out.println("amount: " + data.getAmount());
-        System.out.println("type: " + data.getType());
-        System.out.println("date: " + data.getDate());
-        System.out.println(data);
-        //transactionService.saveTransaction(data);
-        String type = data.getType();
-        String title = data.getTitle();
-        LocalDate date = data.getDate();
-        ExpenseUser user = data.getUser();
-        System.out.println("user : "+ user);
-        String note = data.getNote();
-        double amount = Double.parseDouble(data.getAmount());
-        ExpenseCategory expenseCategory = new ExpenseCategory();
-        expenseCategory.setCategory_type(type);
-        expenseCategory.setCategory_name(title);
-        categoryService.saveCategory(expenseCategory);
-        // get catid after save cat and then save in transaction
-        int catid = expenseCategory.getCategory_id();
-        System.out.println("catid : " + catid);
-        // fix playload add user for save in transaction
-        ExpenseTransaction expenseTransaction = new ExpenseTransaction();
-        expenseTransaction.setAmount(amount);
-        expenseTransaction.setCategoryId(expenseCategory);
-        expenseTransaction.setUser(user);
-        expenseTransaction.setCreateDate(date);
-        expenseTransaction.setNote(note);
-        transactionService.saveTransaction(expenseTransaction);
+    public ResponseEntity<ExpenseTransaction> addTransaction(@RequestBody TransactionRequestDTO transactionRequestDTO){
+        log.info("Received request to add transaction: {}", transactionRequestDTO);
+
+        ExpenseTransaction saveTransaction = transactionService.processAndSaveTransaction(transactionRequestDTO);
+
+        return new ResponseEntity<>(saveTransaction, HttpStatus.CREATED);
+    }
+
+    @PutMapping
+    public ResponseEntity<ExpenseTransaction> updateTRansaction(@RequestBody TransactionRequestDTO transactionRequestDTO){
+        log.info("Received request to update transaction: {}", transactionRequestDTO);
+
+        ExpenseTransaction updateTransaction = transactionService.updateTransaction(transactionRequestDTO);
+
+        return new ResponseEntity<>(updateTransaction, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{id}")
+    public  void deleteTransactrion(@PathVariable int id){
+
     }
 }
