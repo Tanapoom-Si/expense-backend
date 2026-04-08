@@ -6,7 +6,6 @@ import com.dev.expense.model.ExpenseUser;
 import com.dev.expense.repository.CategoryRepository;
 import com.dev.expense.repository.TransactionRepository;
 import com.dev.expense.repository.UserRepository;
-import org.hibernate.Transaction;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
