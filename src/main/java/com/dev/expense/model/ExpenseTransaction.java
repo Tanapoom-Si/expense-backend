@@ -10,6 +10,7 @@ import java.time.LocalDate;
 @Data
 public class ExpenseTransaction {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private double amount;
     private LocalDate createDate;

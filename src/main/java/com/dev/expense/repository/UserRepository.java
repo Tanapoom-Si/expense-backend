@@ -9,6 +9,8 @@ import com.dev.expense.model.ExpenseUser;
 public interface UserRepository extends JpaRepository<ExpenseUser,String> {
     
     Optional<ExpenseUser> findByEmail(String email);
+    ExpenseUser findByUsername(String username);
 
     boolean existsByUsername(String username);
+
 }

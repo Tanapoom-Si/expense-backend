@@ -1,7 +1,10 @@
 package com.dev.expense.service;
 
+import com.dev.expense.model.ExpenseCategory;
 import com.dev.expense.repository.CategoryRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CategoryService {
     private final CategoryRepository categoryRepository;
 
@@ -9,5 +12,7 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-
+    public ExpenseCategory saveCategory(ExpenseCategory category){
+        return categoryRepository.save(category);
+    }
 }
