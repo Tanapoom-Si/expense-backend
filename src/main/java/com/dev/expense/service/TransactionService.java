@@ -64,6 +64,15 @@ public class TransactionService {
        return transactionRepository.save(existingTransaction);
     }
 
+    @Transactional
+    public void deleteTransaction(int id){
+        if(!transactionRepository.existsById(id)){
+            throw new RuntimeException("Transaction not found with id:" + id);
+        }
+
+        transactionRepository.deleteById(id);
+    }
+
     private ExpenseCategory createCategoryFromDTO(TransactionRequestDTO dto){
         ExpenseCategory cat = new ExpenseCategory();
         cat.setCategory_name(dto.getTitle());

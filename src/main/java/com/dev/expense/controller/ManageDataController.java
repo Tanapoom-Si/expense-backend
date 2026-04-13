@@ -9,9 +9,11 @@ import org.springframework.http.HttpStatus;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/transaction")
 @RequiredArgsConstructor
@@ -43,7 +45,11 @@ public class ManageDataController {
     }
 
     @DeleteMapping("/{id}")
-    public  void deleteTransactrion(@PathVariable int id){
+    public ResponseEntity<Map<String, String>> deleteTransaction(@PathVariable int id){
+        log.info("Received request delete transaction id: {}", id);
 
+        transactionService.deleteTransaction(id);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
