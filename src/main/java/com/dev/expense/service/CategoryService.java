@@ -15,8 +15,4 @@ public class CategoryService {
     public ExpenseCategory saveCategory(ExpenseCategory category){
         return categoryRepository.save(category);
     }
-
-    public void deleteByid(int id){
-         categoryRepository.deleteById(id);
-    }
 }
