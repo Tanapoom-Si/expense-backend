@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 @Data
 public class TransactionRequestDTO {
-    private int id;
+    private Integer id;
     private Double amount;
     private LocalDate date;
     private String title;
