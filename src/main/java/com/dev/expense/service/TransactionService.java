@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -21,9 +22,6 @@ public class TransactionService {
     private final UserRepository userRepository;
     private final CategoryService categoryService;
 
-    public List<ExpenseTransaction> getTransaction(){
-        return transactionRepository.findAll();
-    }
 
     @Transactional
     public ExpenseTransaction processAndSaveTransaction(TransactionRequestDTO transactionDto){
@@ -73,6 +71,10 @@ public class TransactionService {
         transactionRepository.deleteById(id);
     }
 
+    public List<ExpenseTransaction> getDataByUser(ExpenseUser user){
+        return transactionRepository.findByUser_Username(user.getUsername());
+    }
+
     private ExpenseCategory createCategoryFromDTO(TransactionRequestDTO dto){
         ExpenseCategory cat = new ExpenseCategory();
         cat.setCategory_name(dto.getTitle());
@@ -91,4 +93,6 @@ public class TransactionService {
 
         return transaction;
     }
+
+
 }
