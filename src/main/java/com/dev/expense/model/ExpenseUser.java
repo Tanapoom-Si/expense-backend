@@ -15,5 +15,4 @@ public class ExpenseUser {
     private String password;
     private String role;
     private String email;
-    private double balance;
 }
