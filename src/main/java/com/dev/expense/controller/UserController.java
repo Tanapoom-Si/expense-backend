@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import com.dev.expense.model.ExpenseUser;
+import com.dev.expense.model.UserRole;
 
 import org.springframework.web.bind.annotation.PutMapping;
 
@@ -50,7 +50,7 @@ public class UserController {
     public ExpenseUser putMethodName(@PathVariable String username, @RequestBody ExpenseUser userRequest) {
         Optional<ExpenseUser> userOpt = userService.getUserByUsername(username);
         String requestEmail = userRequest.getEmail();
-        String requestRole = userRequest.getRole();
+        UserRole requestRole = userRequest.getRole();
         String requestPassword = userRequest.getPassword();
 
         if (userOpt.isPresent()) {

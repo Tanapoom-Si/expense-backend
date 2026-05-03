@@ -41,12 +41,6 @@ public class ManageDataController {
     @PostMapping
     public ResponseEntity<ExpenseTransaction> addTransaction(@RequestBody TransactionRequestDTO transactionRequestDTO){
         log.info("Received request to add transaction: {}", transactionRequestDTO);
-        System.out.println(transactionRequestDTO.getId());
-        System.out.println(transactionRequestDTO.getType());
-        System.out.println(transactionRequestDTO.getDate());
-        System.out.println(transactionRequestDTO.getAmount());
-        System.out.println(transactionRequestDTO.getTitle());
-        System.out.println(transactionRequestDTO.getUser());
         ExpenseTransaction saveTransaction = transactionService.processAndSaveTransaction(transactionRequestDTO);
 
         return new ResponseEntity<>(saveTransaction, HttpStatus.CREATED);
