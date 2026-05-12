@@ -1,7 +1,7 @@
 package com.dev.expense.controller;
 
+import com.dev.expense.dto.LoginRequestDTO;
 import com.dev.expense.model.ExpenseUser;
-import com.dev.expense.model.LoginRequestDTO;
 import com.dev.expense.model.UserRole;
 import com.dev.expense.service.UserService;
 import lombok.RequiredArgsConstructor;

@@ -1,5 +1,6 @@
-package com.dev.expense.model;
+package com.dev.expense.dto;
 
+import com.dev.expense.model.ExpenseUser;
 import lombok.Data;
 
 @Data

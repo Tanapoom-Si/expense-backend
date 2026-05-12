@@ -1,8 +1,8 @@
 package com.dev.expense.controller;
 
+import com.dev.expense.dto.TransactionRequestDTO;
+import com.dev.expense.dto.UserRequestDTO;
 import com.dev.expense.model.ExpenseTransaction;
-import com.dev.expense.model.TransactionRequestDTO;
-import com.dev.expense.model.UserRequestDTO;
 import com.dev.expense.service.TransactionService;
 import com.dev.expense.service.UserService;
 import lombok.RequiredArgsConstructor;

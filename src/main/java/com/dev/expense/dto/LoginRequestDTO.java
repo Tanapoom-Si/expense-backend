@@ -1,4 +1,4 @@
-package com.dev.expense.model;
+package com.dev.expense.dto;
 
 import lombok.Data;
 
